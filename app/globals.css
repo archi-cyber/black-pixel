@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink: #0a0a0a;
+  --color-surface: #131313;
+  --color-surface-alt: #1b1b1b;
+  --color-line: #2a2a2a;
+  --color-cream: #f4efe6;
+  --color-cream-dim: #dcd5c6;
+  --color-pixel-orange: #f28c0a;
+  --color-pixel-orange-deep: #c9670a;
+  --color-pixel-gold: #ffce73;
+  --color-pixel-amber: #8a4b0a;
+
+  --font-display: var(--font-fraunces), serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-mono: var(--font-plex), monospace;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0a0a0a;
+  color: #f4efe6;
+  font-feature-settings: "ss01" on, "ss02" on;
+}
+
+::selection {
+  background-color: #f28c0a;
+  color: #0a0a0a;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #f28c0a;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.corner-frame {
+  position: relative;
+}
+.corner-frame::before,
+.corner-frame::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: #f28c0a;
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  transform: scale(0.85);
+}
+.corner-frame::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.corner-frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+.corner-frame:hover::before,
+.corner-frame:hover::after,
+.corner-frame:focus-within::before,
+.corner-frame:focus-within::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.exif {
+  font-family: var(--font-plex), monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
